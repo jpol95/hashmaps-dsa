@@ -65,7 +65,24 @@ const canPalindrome = (input) => {
     return true;
 }
 
+const aGrouping = (input) => {
+    let groupMap = new HashMap();
+    for (let i = 0; i < input.length; i++) groupMap.set(input[i].split("").sort().join(""), []);
+    for (let i = 0; i < input.length; i++){
+        let str1 = input[i].split("").sort().join("");
+            groupMap.get(str1).push(input[i])
+    }
+    let result = [];
+    for (let entry of groupMap._hashTable){
+        if (!entry) continue;
+        result.push(entry.value);
+    }
+    return result;
+}
+
+
 // main();
 // WhatDoesThisDo();
 // console.log(removeDuplicates("google all that you think can think of"));
-console.log(canPalindrome("acearrrc"))
+// console.log(canPalindrome("acearrrc"))
+console.log(aGrouping(['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']))
