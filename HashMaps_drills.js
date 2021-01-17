@@ -46,7 +46,26 @@ const removeDuplicates = (input) => {
     return result.join("")
 }
 
+const canPalindrome = (input) => {
+    let charMap = new HashMap();
+    for (let i = 0; i < input.length; i++){
+        try {
+        let charInMap = charMap.get(input.charAt(i));
+        charMap.set(input.charAt(i), !(!!charInMap));
+        } catch (e) {
+            charMap.set(input.charAt(i), false);
+        }
+    }
+    let singleCounter = 0;
+    for (let entry of charMap._hashTable){
+        if (!entry) continue;
+         singleCounter += +(!entry.value);
+    }
+    if (singleCounter > 1) return false;
+    return true;
+}
+
 // main();
 // WhatDoesThisDo();
-console.log(removeDuplicates("google all that you think can think of"));
-
+// console.log(removeDuplicates("google all that you think can think of"));
+console.log(canPalindrome("acearrrc"))
